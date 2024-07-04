@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Sobre";
+}
+
+<div class="text-center container my-5">
+    <div class="text-center">
+        <h1 class="display-4">Bem Vindo(a) ao Gestor de Compras</h1>
+    </div>
+
+    <div class="my-4">
+        <h2>Sobre o Projeto</h2>
+        <p class="lead">
+            Essa é uma aplicação web para gestão de compras e produtos, feita por mim 
+            <a href="https://www.linkedin.com/in/eduardo-santos-pires-289aa91ab/" target="_blank" title="link do meu LinkedIn">Eduardo Pires</a>. Nela, poderemos adicionar e monitorar faturas de compras e contas, além de ver produtos delas que estão para vencer, dentre outras funcionalidades.
+        </p>
+        <p>
+            Esse projeto foi criado com a intenção de treinar alguns dos conceitos que eu tenho estudado nos últimos meses, os quais são primariamente de backend. Os visuais são apenas para dar suporte ao acesso das funcionalidades e serão melhorados no futuro.
+        </p>
+    </div>
+
+    <div class="my-4">
+        <h2>Principais Páginas</h2>
+        <ul class="list-unstyled">
+            <li><a class="btn btn-link" asp-action="ListarFaturas">Listar Faturas</a></li>
+            <li><a class="btn btn-link" asp-action="TodosOsProdutos">Todos Os Produtos</a></li>
+            <li><a class="btn btn-link" asp-action="CriarFatura">Criar Fatura</a></li>
+        </ul>
+    </div>
+</div>
+
