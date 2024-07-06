@@ -37,6 +37,8 @@ namespace GestorMVC.Models
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
+
+        [Display(Name = "Id da Fatura")]
         public int FaturaId { get; set;}
 
         [ForeignKey("FaturaId")]

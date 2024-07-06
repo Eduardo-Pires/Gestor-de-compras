@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace GestorMVC.Models.Enums
 {
     public enum EstadoFatura
@@ -5,6 +7,7 @@ namespace GestorMVC.Models.Enums
         Pendente,
         Vencida,
         Paga,
+        [Display(Name = "Parcialmente Paga")]
         ParcialmentePaga,
         Cancelada,
         Atrasada,
