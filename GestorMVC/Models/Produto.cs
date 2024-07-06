@@ -15,7 +15,7 @@ namespace GestorMVC.Models
             
         }
 
-        public Produto(int id, string nome, CategoriaProduto categoria, int quantidade, decimal preco, int idFatura, DateOnly? validade = null)
+        public Produto(int id, string nome, CategoriaProduto categoria, int quantidade, decimal preco, int faturaId, DateOnly? validade = null)
         {
             Id = id;
             Nome = nome;
@@ -23,7 +23,7 @@ namespace GestorMVC.Models
             Quantidade = quantidade;
             Validade = validade;
             Preco = preco;
-            IdFatura = idFatura;
+            FaturaId = faturaId;
         }
 
         public int Id { get; set; }
@@ -37,8 +37,9 @@ namespace GestorMVC.Models
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
+        public int FaturaId { get; set;}
 
-        public int IdFatura { get; set; }
+        [ForeignKey("FaturaId")]
         public Fatura Fatura { get; set; }
 
     }
