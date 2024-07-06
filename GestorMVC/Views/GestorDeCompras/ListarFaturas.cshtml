@@ -4,7 +4,7 @@
     ViewData["Title"] = "Listar Faturas";
 }
 
-<h2>Faturas</h2>
+<h1>Faturas</h1>
 
 <p>
     <a href="CriarFatura"> Criar Fatura</a>
@@ -13,6 +13,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.DataCompra)</th>
             <th>@Html.DisplayNameFor(model => model.Recebedor)</th>
             <th>@Html.DisplayNameFor(model => model.TipoPagamento)</th>
@@ -26,27 +27,29 @@
         @foreach(var item in Model)
         {
             <tr>
-            <td>@Html.DisplayFor(Model => item.DataCompra)</td>
-       
-            <td>@Html.DisplayFor(Model => item.Recebedor)</td>
-       
-            <td>@Html.DisplayFor(Model => item.TipoPagamento)</td>
-       
-            <td>@Html.DisplayFor(Model => item.Estado)</td>
-       
-            <td>@Html.DisplayFor(Model => item.Parcelas)</td>
+                <td><strong>@Html.DisplayFor(Model => item.Id)</strong></td>
+
+                <td>@Html.DisplayFor(Model => item.DataCompra)</td>
         
-            <td>@Html.DisplayFor(Model => item.TotalCompra)</td>
-            <td>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="EditarFatura"asp-route-id="@item.Id">Editar</a> </li>
-                        <li class="breadcrumb-item active" aria-current="page"><a class="link" style="cursor: pointer;"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deletar</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="ProdutosFatura" asp-route-id="@item.Id">Ver Produtos</a> </li>
-                    </ol>
-                </nav>
-            </td>
-        </tr>
+                <td>@Html.DisplayFor(Model => item.Recebedor)</td>
+        
+                <td>@Html.DisplayFor(Model => item.TipoPagamento)</td>
+        
+                <td>@Html.DisplayFor(Model => item.Estado)</td>
+        
+                <td>@Html.DisplayFor(Model => item.Parcelas)</td>
+            
+                <td>@Html.DisplayFor(Model => item.TotalCompra)</td>
+                <td>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active" aria-current="page"><a asp-action="EditarFatura"asp-route-id="@item.Id">Editar</a> </li>
+                            <li class="breadcrumb-item active" aria-current="page"><a class="link" style="cursor: pointer;"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deletar</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a asp-action="ProdutosFatura" asp-route-id="@item.Id">Ver Produtos</a> </li>
+                        </ol>
+                    </nav>
+                </td>
+           </tr>
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
