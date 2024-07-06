@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using GestorMVC.Context;
+using GestorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace GestorMVC.Controllers
 {
-    public class GestorDeComprasController : Controller
+    public class GestorDeComprasController(ComprasContext context) : Controller
     {
+        private readonly ComprasContext _context = context;
 
         
         public IActionResult Index()
@@ -20,8 +23,21 @@ namespace GestorMVC.Controllers
         [HttpGet("ListarFaturas")]
         public IActionResult ListarFaturas()
         {
-            return View();
+            var faturas = _context.Faturas.ToList();
+            return View(faturas);
         }
+
+        [HttpPost]
+        public IActionResult DeletarFatura(int id)
+        {
+            var faturaBanco = _context.Faturas.Find(id);
+            _context.Faturas.Remove(faturaBanco);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(ListarFaturas));
+        
+        }
+
 
         [HttpGet("CriarFatura")]
         public IActionResult CriarFatura()

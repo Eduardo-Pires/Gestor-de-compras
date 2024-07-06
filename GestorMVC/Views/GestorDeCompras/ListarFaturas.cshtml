@@ -1,0 +1,76 @@
+@model IEnumerable<GestorMVC.Models.Fatura>
+
+@{
+    ViewData["Title"] = "Listar Faturas";
+}
+
+<h2>Faturas</h2>
+
+<p>
+    <a href="CriarFatura"> Criar Fatura</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DataCompra)</th>
+            <th>@Html.DisplayNameFor(model => model.Recebedor)</th>
+            <th>@Html.DisplayNameFor(model => model.TipoPagamento)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th>@Html.DisplayNameFor(model => model.Parcelas)</th>
+            <th>@Html.DisplayNameFor(model => model.TotalCompra)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+            <td>@Html.DisplayFor(Model => item.DataCompra)</td>
+       
+            <td>@Html.DisplayFor(Model => item.Recebedor)</td>
+       
+            <td>@Html.DisplayFor(Model => item.TipoPagamento)</td>
+       
+            <td>@Html.DisplayFor(Model => item.Estado)</td>
+       
+            <td>@Html.DisplayFor(Model => item.Parcelas)</td>
+        
+            <td>@Html.DisplayFor(Model => item.TotalCompra)</td>
+            <td>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="EditarFatura"asp-route-id="@item.Id">Editar</a> </li>
+                        <li class="breadcrumb-item active" aria-current="page"><a class="link" style="cursor: pointer;"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deletar</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a asp-action="ProdutosFatura" asp-route-id="@item.Id">Ver Produtos</a> </li>
+                    </ol>
+                </nav>
+            </td>
+        </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Deletar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Atenção</strong>, essa ação é irreversível, ao clicar em deletar você perderá <strong>todos</strong>  os dados de sua fatura, incluindo os produtos nela contidos, prossiga com cautela.
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="DeletarFatura"  asp-route-id="@item.Id">
+                        <input type="submit" value="Deletar Fatura" class="btn btn-danger">
+                    </form>
+                    @* <form  asp-action="DeletarFaturaEProdutos"  asp-route-id="@item.Id">
+                        <input type="submit" value="Deletar Fatura e Produtos" class="btn btn-danger">
+                    </form> *@
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        }
+    </tbody>
+</table>
+
