@@ -1,0 +1,59 @@
+@model GestorMVC.Models.Fatura
+@using GestorMVC.Helpers
+
+@{
+    ViewData["Title"] = "Editar Fatura";
+    var estados = HtmlHelpers.EnumParaLista<GestorMVC.Models.Enums.EstadoFatura>();
+    var tiposPagamento = HtmlHelpers.EnumParaLista<GestorMVC.Models.Enums.TipoPagamento>();
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarFatura">
+            <div class="form-group">
+                <label asp-for="TotalCompra" class="control-label"></label>
+                <input asp-for="TotalCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoPagamento" class="control-label"></label>
+                <select asp-for="TipoPagamento" class="form-select">
+                    @foreach (var item in tiposPagamento)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCompra" class="control-label"></label>
+                <input asp-for="DataCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label">Estado da Fatura:</label>
+                <select asp-for="Estado" class="form-select">
+                    @foreach (var item in estados)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recebedor" class="control-label"></label>
+                <input asp-for="Recebedor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Parcelas" class="control-label"></label>
+                <input asp-for="Parcelas" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Enviar Dados" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="ListarFaturas">Voltar para a lista de faturas</a>
+</div>

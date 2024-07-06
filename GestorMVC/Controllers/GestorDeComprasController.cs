@@ -31,6 +31,12 @@ namespace GestorMVC.Controllers
         public IActionResult DeletarFatura(int id)
         {
             var faturaBanco = _context.Faturas.Find(id);
+            
+            if (faturaBanco == null)
+            {
+                return NotFound();
+            }
+
             _context.Faturas.Remove(faturaBanco);
             _context.SaveChanges();
 
@@ -38,6 +44,34 @@ namespace GestorMVC.Controllers
         
         }
 
+        public IActionResult EditarFatura(int id)
+        {
+            var faturaBanco = _context.Faturas.Find(id);
+            return View(faturaBanco);
+        }
+
+        [HttpPost]
+        public IActionResult EditarFatura(Fatura fatura)
+        {
+            var faturaBanco = _context.Faturas.Find(fatura.Id);
+
+            if (faturaBanco == null)
+            {
+                return NotFound();
+            }
+
+            faturaBanco.TotalCompra = fatura.TotalCompra;
+            faturaBanco.TipoPagamento = fatura.TipoPagamento;
+            faturaBanco.DataCompra = fatura.DataCompra;
+            faturaBanco.Estado = fatura.Estado;
+            faturaBanco.Recebedor = fatura.Recebedor;
+            faturaBanco.Parcelas = fatura.Parcelas;
+
+            _context.Faturas.Update(faturaBanco);
+            _context.SaveChanges();
+            
+            return RedirectToAction(nameof(ListarFaturas));
+        }
 
         [HttpGet("CriarFatura")]
         public IActionResult CriarFatura()
