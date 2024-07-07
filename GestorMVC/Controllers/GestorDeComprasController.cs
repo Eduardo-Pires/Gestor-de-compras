@@ -79,6 +79,14 @@ namespace GestorMVC.Controllers
             return View();
         }
 
+        [HttpPost("CriarFatura")]
+        public IActionResult CriarFatura(Fatura fatura)
+        {
+            _context.Faturas.Add(fatura);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(ListarFaturas));
+        }
+
         [HttpGet("AdicionarProduto")]
         public IActionResult AdicionarProduto()
         {

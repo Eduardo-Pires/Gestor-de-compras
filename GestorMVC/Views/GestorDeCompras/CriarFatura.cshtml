@@ -1,0 +1,101 @@
+@model GestorMVC.Models.Fatura
+@using GestorMVC.Helpers
+
+@{
+    ViewData["Title"] = "Adicionar Fatura";
+    var estados = HtmlHelpers.EnumParaLista<GestorMVC.Models.Enums.EstadoFatura>();
+    var tiposPagamento = HtmlHelpers.EnumParaLista<GestorMVC.Models.Enums.TipoPagamento>();
+    var dataAtual = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriarFatura">
+            <div class="form-check form-group">
+                <label for="TemProdutos" class="form-check-label">A fatura tem produtos?</label>
+                <input id="TemProdutos" type="checkbox" class="form-check-input" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalCompra" class="control-label"></label>
+                <input asp-for="TotalCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCompra" class="control-label"></label>
+                <input type="date" asp-for="DataCompra" value="@dataAtual" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label">Estado da Fatura:</label>
+                <select asp-for="Estado" class="form-select">
+                    @foreach (var item in estados)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoPagamento" class="control-label"></label>
+                <select asp-for="TipoPagamento" class="form-select">
+                    @foreach (var item in tiposPagamento)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recebedor" class="control-label"></label>
+                <input asp-for="Recebedor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Parcelas" class="control-label"></label>
+                <input asp-for="Parcelas" min="0" value="1" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Enviar Dados" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="ListarFaturas">Voltar para a lista de faturas</a>
+</div>
+
+<div class="toast-container position-fixed top-50 start-50 translate-middle">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+      <strong class="me-auto">Fatura de Produtos</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+       O valor será somado ao adicionar produtos. Para ajustes, vá em <strong>Editar Fatura</strong>.
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const temProdutosCheckbox = document.getElementById('TemProdutos');
+        const totalCompraInput = document.getElementById('TotalCompra');
+        const toastEl = document.getElementById('liveToast');
+        const toast = new bootstrap.Toast(toastEl);
+
+        function ajustaTotalCompra() {
+            if (temProdutosCheckbox.checked) {
+                totalCompraInput.value = '0';
+                totalCompraInput.setAttribute('disabled', 'disabled');
+                toast.show();
+            } else {
+                totalCompraInput.removeAttribute('disabled');
+            }
+        }
+
+        temProdutosCheckbox.addEventListener('change', ajustaTotalCompra);
+
+        ajustaTotalCompra();
+    });
+</script>
+
