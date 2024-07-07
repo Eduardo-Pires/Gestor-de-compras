@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GestorMVC.Helpers
 {
@@ -17,13 +17,11 @@ namespace GestorMVC.Helpers
 
             foreach (var valorEnum in valoresEnum)
             {
-                var atributoDisplay = valorEnum.GetType()
+                string? nomeExibicao = valorEnum.GetType()
                                                .GetMember(valorEnum.ToString())
                                                .First()
                                                .GetCustomAttributes(typeof(DisplayAttribute), false)
-                                               .FirstOrDefault() as DisplayAttribute;
-
-                string nomeExibicao = atributoDisplay != null ? atributoDisplay.Name : valorEnum.ToString();
+                                               .FirstOrDefault() is DisplayAttribute atributoDisplay ? atributoDisplay.Name : valorEnum.ToString();
 
                 listaSelect.Add(new SelectListItem
                 {
