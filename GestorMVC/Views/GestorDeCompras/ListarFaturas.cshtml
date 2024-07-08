@@ -7,7 +7,7 @@
 <h1>Faturas</h1>
 
 <p>
-    <a href="CriarFatura"> Criar Fatura</a>
+    <a asp-action="CriarFatura"> Criar Fatura</a>
 </p>
 
 <table class="table">
@@ -45,7 +45,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active" aria-current="page"><a asp-action="EditarFatura"asp-route-id="@item.Id">Editar</a> </li>
                             <li class="breadcrumb-item active" aria-current="page"><a class="link" style="cursor: pointer;"data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deletar</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a asp-action="ProdutosFatura" asp-route-id="@item.Id">Ver Produtos</a> </li>
+                            <li class="breadcrumb-item active" aria-current="page"><a asp-action="ProdutosFatura" asp-route-id="@item.Id">Produtos</a> </li>
                         </ol>
                     </nav>
                 </td>
@@ -65,9 +65,6 @@
                     <form asp-action="DeletarFatura"  asp-route-id="@item.Id">
                         <input type="submit" value="Deletar Fatura" class="btn btn-danger">
                     </form>
-                    @* <form  asp-action="DeletarFaturaEProdutos"  asp-route-id="@item.Id">
-                        <input type="submit" value="Deletar Fatura e Produtos" class="btn btn-danger">
-                    </form> *@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
                 </div>
