@@ -34,7 +34,8 @@ namespace GestorMVC.Models
         public CategoriaProduto Categoria { get; set; }
         public int Quantidade { get; set; }
         public DateOnly? Validade { get; set; }
-
+        
+        [Display(Name = "Preço")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
 

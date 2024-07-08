@@ -28,14 +28,14 @@ namespace GestorMVC.Models
         }
         public int Id { get; set; }
 
-        [Display(Name = "Total Compra")]
+        [Display(Name = "Total")]
         [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalCompra {get; set;}
 
         [Display(Name = "Tipo Pagamento")]
         public TipoPagamento TipoPagamento { get; set; }
 
-        [Display(Name = "Data Compra")]
+        [Display(Name = "Data")]
         public DateOnly DataCompra { get; set;}
         public int? Parcelas { get; set; }
         public EstadoFatura Estado {get; set; }
