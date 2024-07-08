@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using GestorMVC.Context;
+using GestorMVC.Migrations;
 using GestorMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -94,9 +95,16 @@ namespace GestorMVC.Controllers
         }
 
         [HttpGet("ProdutosFatura")]
-        public IActionResult ProdutosFatura()
+        public IActionResult ProdutosFatura(int id)
         {
-            return View();   
+            var faturaBanco = _context.Faturas.Find(id);
+            ViewBag.FaturaId = id;
+            ViewBag.DataFatura = faturaBanco.DataCompra;
+            ViewBag.Recebedor = faturaBanco.Recebedor;
+
+            var produtos = _context.Produtos.Where(p => p.FaturaId == id).ToList();
+
+            return View(produtos);   
         }
 
         [HttpGet("TodosOsProdutos")]
