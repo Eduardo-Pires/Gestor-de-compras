@@ -88,6 +88,13 @@ namespace GestorMVC.Controllers
             return RedirectToAction(nameof(ListarFaturas));
         }
 
+        [HttpGet("DetalhesFatura")]
+        public IActionResult DetalhesFatura(int id)
+        {
+            var faturaBanco = _context.Faturas.Find(id);
+            return View(faturaBanco);
+        }
+
         [HttpGet("AdicionarProduto/{id?}")]
         public IActionResult AdicionarProduto(int? id)
         {

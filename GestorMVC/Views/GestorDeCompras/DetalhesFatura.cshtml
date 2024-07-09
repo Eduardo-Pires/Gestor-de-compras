@@ -1,0 +1,40 @@
+@model GestorMVC.Models.Fatura
+
+@{
+    ViewData["Title"] = "Detalhes Fatura";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.Id)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.Id)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.DataCompra)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.DataCompra)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.Recebedor)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.Recebedor)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.TipoPagamento)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.TipoPagamento)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.Parcelas)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.Parcelas)</dd>
+        
+        <dt class="col-sm-2">@Html.DisplayNameFor(x => x.TotalCompra)</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(x => x.TotalCompra)</dd>
+    </dl>
+</div>
+<br />
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+            <a asp-action="EditarFatura"asp-route-id="@Model.Id">Editar Fatura</a> 
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a href="javascript:history.back()" >Voltar</a>
+        </li>
+    </ol>
+</nav>
