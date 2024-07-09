@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = $"Produtos - Fatura {ViewBag.FaturaId}";
-    //var data = ViewBag.DataFatura;
 }
 
 <h1>Fatura #@ViewBag.FaturaId - emitida em @ViewBag.DataFatura  (@ViewBag.Recebedor)</h1>
@@ -10,8 +9,12 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a asp-action="AdicionarProduto"> Adicionar Produto</a> </li>
-        <li class="breadcrumb-item active" aria-current="page"><a asp-action="DetalhesFatura"asp-route-id="@ViewBag.FaturaId">Detalhes da fatura</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a asp-action="AdicionarProduto" asp-route-id="@ViewBag.FaturaId">Adicionar Produto</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <a asp-action="DetalhesFatura"asp-route-id="@ViewBag.FaturaId">Detalhes da fatura</a>
+        </li>
     </ol>
 </nav>
 
@@ -22,7 +25,9 @@
             <th>@Html.DisplayNameFor(model => model.Nome)</th>
             <th>@Html.DisplayNameFor(model => model.Categoria)</th>
             <th>@Html.DisplayNameFor(model => model.Validade)</th>
+            <th>@Html.DisplayNameFor(model => model.Quantidade)</th>
             <th>@Html.DisplayNameFor(model => model.Preco)</th>
+            <th>Total</th>
             <th></th>
         </tr>
     </thead>
@@ -37,9 +42,14 @@
                 <td>@Html.DisplayFor(Model => item.Categoria)</td>
         
                 <td>@Html.DisplayFor(Model => item.Validade)</td>
+
+                <td>@Html.DisplayFor(Model => item.Quantidade)</td>
         
                 <td>@Html.DisplayFor(Model => item.Preco)</td>
-        
+
+                <td>@(item.Quantidade * item.Preco)</td>
+
+
                 <td>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">

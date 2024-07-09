@@ -35,7 +35,7 @@ namespace GestorMVC.Models
         public int Quantidade { get; set; }
         public DateOnly? Validade { get; set; }
         
-        [Display(Name = "Preço")]
+        [Display(Name = "Preço Unidade")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
 
