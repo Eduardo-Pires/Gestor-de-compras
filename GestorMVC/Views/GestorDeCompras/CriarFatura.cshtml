@@ -20,10 +20,12 @@
             <div class="form-group">
                 <label asp-for="TotalCompra" class="control-label"></label>
                 <input asp-for="TotalCompra" class="form-control" />
+                <span asp-validation-for="TotalCompra" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataCompra" class="control-label"></label>
                 <input type="date" asp-for="DataCompra" value="@dataAtual" class="form-control" />
+                <span asp-validation-for="DataCompra" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label">Estado da Fatura:</label>
@@ -33,6 +35,7 @@
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoPagamento" class="control-label"></label>
@@ -42,14 +45,17 @@
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
+                <span asp-validation-for="TipoPagamento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Recebedor" class="control-label"></label>
                 <input asp-for="Recebedor" class="form-control" />
+                <span asp-validation-for="Recebedor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Parcelas" class="control-label"></label>
                 <input asp-for="Parcelas" min="0" value="1" class="form-control" />
+                <span asp-validation-for="Parcelas" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
@@ -75,6 +81,10 @@
     </div>
   </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
