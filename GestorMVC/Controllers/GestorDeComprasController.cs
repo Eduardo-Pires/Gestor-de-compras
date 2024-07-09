@@ -88,11 +88,49 @@ namespace GestorMVC.Controllers
             return RedirectToAction(nameof(ListarFaturas));
         }
 
-        [HttpGet("AdicionarProduto")]
-        public IActionResult AdicionarProduto()
+        [HttpGet("AdicionarProduto/{id?}")]
+        public IActionResult AdicionarProduto(int? id)
         {
+            if (id.HasValue)
+            {
+                ViewBag.Id = id.Value;
+            }
+
             return View();
         }
+
+
+        [HttpPost("AdicionarProdutoPost")]
+        public IActionResult AdicionarProdutoPost(Produto produto)
+        {
+            _context.Produtos.Add(produto);
+
+            var faturaBanco = _context.Faturas.Find(produto.FaturaId);
+            faturaBanco.TotalCompra += produto.Preco * produto.Quantidade;
+
+            _context.SaveChanges();
+            return RedirectToAction("ProdutosFatura", new { id = produto.FaturaId });
+        }
+
+        [HttpPost]
+        public IActionResult DeletarProduto(int id)
+        {
+            var produtoBanco = _context.Produtos.Find(id);
+
+            if (produtoBanco == null)
+            {
+                return NotFound();
+            }
+
+            var faturaId = produtoBanco.FaturaId;
+
+            _context.Produtos.Remove(produtoBanco);
+            _context.SaveChanges();
+
+            return RedirectToAction("ProdutosFatura", new { id = faturaId });
+        }
+
+
 
         [HttpGet("ProdutosFatura")]
         public IActionResult ProdutosFatura(int id)
