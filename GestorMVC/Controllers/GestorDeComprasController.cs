@@ -158,15 +158,49 @@ namespace GestorMVC.Controllers
             return View();
         }
 
-        [HttpGet("EditarProduto")]
+        [HttpGet("EditarProduto/{id}")]
         public IActionResult EditarProduto(int id)
         {
             var produtoBanco = _context.Produtos.Find(id);
             if (produtoBanco == null)
             {
-                return NotFound(); // Retorne um 404 se o produto não for encontrado
+                return NotFound(); 
             }
             return View(produtoBanco);
+        }
+
+        [HttpPost("EditarProdutoPost")]
+        public IActionResult EditarProdutoPost(Produto produto)
+        {
+            if (produto == null || produto.Id <= 0)
+            {
+                return NotFound();
+            }
+
+            var produtoBanco = _context.Produtos.Find(produto.Id);
+            var faturaBanco = _context.Faturas.Find(produto.FaturaId);
+
+            if (produtoBanco == null || faturaBanco == null)
+            {
+                return NotFound();
+            }
+
+            faturaBanco.TotalCompra -= produtoBanco.Preco * produtoBanco.Quantidade;
+
+            produtoBanco.Nome = produto.Nome;
+            produtoBanco.FaturaId = produto.FaturaId;
+            produtoBanco.Preco = produto.Preco;
+            produtoBanco.Quantidade = produto.Quantidade;
+            produtoBanco.Categoria = produto.Categoria;
+            produtoBanco.Validade = produto.Validade;
+
+            faturaBanco.TotalCompra += produto.Preco * produto.Quantidade;
+
+            _context.Faturas.Update(faturaBanco);
+            _context.Produtos.Update(produtoBanco);
+            _context.SaveChanges();
+
+            return RedirectToAction("ProdutosFatura", new { id = produto.FaturaId });
         }
 
 
