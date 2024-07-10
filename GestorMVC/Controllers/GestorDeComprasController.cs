@@ -158,6 +158,18 @@ namespace GestorMVC.Controllers
             return View();
         }
 
+        [HttpGet("EditarProduto")]
+        public IActionResult EditarProduto(int id)
+        {
+            var produtoBanco = _context.Produtos.Find(id);
+            if (produtoBanco == null)
+            {
+                return NotFound(); // Retorne um 404 se o produto não for encontrado
+            }
+            return View(produtoBanco);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
