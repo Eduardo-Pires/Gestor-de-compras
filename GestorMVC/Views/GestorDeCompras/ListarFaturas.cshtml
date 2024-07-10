@@ -37,7 +37,16 @@
         
                 <td>@Html.DisplayFor(Model => item.Estado)</td>
         
-                <td>@Html.DisplayFor(Model => item.Parcelas)</td>
+                <td>
+                    @if (item.Parcelas.HasValue)
+                    {
+                        @Html.DisplayFor(Model => item.Parcelas)
+                    }
+                    else
+                    {
+                        <span>não possui</span>
+                    }
+                </td>   
             
                 <td>@Html.DisplayFor(Model => item.TotalCompra)</td>
                 <td>

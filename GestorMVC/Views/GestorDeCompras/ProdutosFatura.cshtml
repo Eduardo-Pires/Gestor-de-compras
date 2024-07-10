@@ -41,7 +41,16 @@
         
                 <td>@Html.DisplayFor(Model => item.Categoria)</td>
         
-                <td>@Html.DisplayFor(Model => item.Validade)</td>
+                <td>
+                    @if (item.Validade.HasValue)
+                    {
+                        @Html.DisplayFor(Model => item.Validade)
+                    }
+                    else
+                    {
+                        <span>não possui</span>
+                    }
+                </td>       
 
                 <td>@Html.DisplayFor(Model => item.Quantidade)</td>
         
