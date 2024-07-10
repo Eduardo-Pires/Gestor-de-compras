@@ -28,6 +28,13 @@ namespace GestorMVC.Controllers
             return View(faturas);
         }
 
+        [HttpGet("TodosOsProdutos")]
+        public IActionResult TodosOsProdutos()
+        {
+            var produtos = _context.Produtos.ToList();
+            return View(produtos);
+        }
+
         [HttpPost]
         public IActionResult DeletarFatura(int id)
         {
@@ -123,16 +130,28 @@ namespace GestorMVC.Controllers
         public IActionResult DeletarProduto(int id)
         {
             var produtoBanco = _context.Produtos.Find(id);
+            var faturaBanco = _context.Faturas.Find(produtoBanco.FaturaId);
 
-            if (produtoBanco == null)
+            if (produtoBanco == null || faturaBanco == null)
             {
                 return NotFound();
             }
 
             var faturaId = produtoBanco.FaturaId;
+            faturaBanco.TotalCompra -= produtoBanco.Preco * produtoBanco.Quantidade;
 
+            _context.Faturas.Update(faturaBanco);
             _context.Produtos.Remove(produtoBanco);
             _context.SaveChanges();
+
+            if (Request.Headers.ContainsKey("Referer"))
+            {
+                // Obtém a URL da página anterior
+                var refererUrl = Request.Headers["Referer"].ToString();
+                
+                // Redireciona para a URL da página anterior
+                return Redirect(refererUrl);
+            }
 
             return RedirectToAction("ProdutosFatura", new { id = faturaId });
         }
@@ -152,11 +171,6 @@ namespace GestorMVC.Controllers
             return View(produtos);   
         }
 
-        [HttpGet("TodosOsProdutos")]
-        public IActionResult TodosOsProdutos()
-        {
-            return View();
-        }
 
         [HttpGet("EditarProduto/{id}")]
         public IActionResult EditarProduto(int id)
