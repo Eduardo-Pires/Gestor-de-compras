@@ -12,50 +12,44 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CriarFatura">
+        <form asp-action="CriarFatura" id="faturaForm">
             <div class="form-check form-group">
                 <label for="TemProdutos" class="form-check-label">A fatura tem produtos?</label>
                 <input id="TemProdutos" type="checkbox" class="form-check-input" />
             </div>
             <div class="form-group">
                 <label asp-for="TotalCompra" class="control-label"></label>
-                <input asp-for="TotalCompra" class="form-control" />
-                <span asp-validation-for="TotalCompra" class="text-danger"></span>
+                <input asp-for="TotalCompra" id="totalCompra" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="DataCompra" class="control-label"></label>
-                <input type="date" asp-for="DataCompra" value="@dataAtual" class="form-control" />
-                <span asp-validation-for="DataCompra" class="text-danger"></span>
+                <input type="date" asp-for="DataCompra" id="dataCompra" value="@dataAtual" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label">Estado da Fatura:</label>
-                <select asp-for="Estado" class="form-select">
+                <select asp-for="Estado" id="estado" class="form-select" required>
                     @foreach (var item in estados)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TipoPagamento" class="control-label"></label>
-                <select asp-for="TipoPagamento" class="form-select">
+                <select asp-for="TipoPagamento" id="tipoPagamento" class="form-select" required>
                     @foreach (var item in tiposPagamento)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <span asp-validation-for="TipoPagamento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Recebedor" class="control-label"></label>
-                <input asp-for="Recebedor" class="form-control" />
-                <span asp-validation-for="Recebedor" class="text-danger"></span>
+                <input asp-for="Recebedor" id="recebedor" class="form-control" required />
             </div>
             <div class="form-group">
-                <label asp-for="Parcelas" class="control-label">número de parcelas (caso não possua deixar vazio)</label>
-                <input asp-for="Parcelas" min="0" class="form-control" />
-                <span asp-validation-for="Parcelas" class="text-danger"></span>
+                <label asp-for="Parcelas" class="control-label">Número de parcelas (caso não possua deixar vazio)</label>
+                <input asp-for="Parcelas" id="parcelas" min="0" class="form-control" />
             </div>
             <br />
             <div class="form-group">
@@ -82,18 +76,15 @@
   </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const temProdutosCheckbox = document.getElementById('TemProdutos');
-        const totalCompraInput = document.getElementById('TotalCompra');
-        const toastEl = document.getElementById('liveToast');
-        const toast = new bootstrap.Toast(toastEl);
-
+        // Função de ajuste do TotalCompra e exibição do toast
         function ajustaTotalCompra() {
+            const temProdutosCheckbox = document.getElementById('TemProdutos');
+            const totalCompraInput = document.getElementById('totalCompra');
+            const toastEl = document.getElementById('liveToast');
+            const toast = new bootstrap.Toast(toastEl);
+
             if (temProdutosCheckbox.checked) {
                 totalCompraInput.value = '0';
                 totalCompraInput.setAttribute('disabled', 'disabled');
@@ -103,9 +94,10 @@
             }
         }
 
-        temProdutosCheckbox.addEventListener('change', ajustaTotalCompra);
+        // Adicionar event listeners
+        document.getElementById('TemProdutos').addEventListener('change', ajustaTotalCompra);
 
+        // Inicializar ajuste de TotalCompra
         ajustaTotalCompra();
     });
 </script>
-

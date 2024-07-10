@@ -13,38 +13,32 @@
         <form asp-action="AdicionarProdutoPost" method="post">
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+                <input asp-for="Nome" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Validade" class="control-label">Validade (deixar vazio caso não possua)</label>
                 <input type="date" asp-for="Validade" class="form-control" />
-                <span asp-validation-for="Validade" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Categoria" class="control-label"></label>
-                <select asp-for="Categoria" class="form-select">
+                <select asp-for="Categoria" class="form-select" required>
                     @foreach (var item in categorias)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                 <span asp-validation-for="Categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Preco" class="control-label"></label>
-                <input asp-for="Preco" class="form-control" />
-                <span asp-validation-for="Preco" class="text-danger"></span>
+                <input min="0.01" asp-for="Preco" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Quantidade" class="control-label"></label>
-                <input asp-for="Quantidade" class="form-control" />
-                <span asp-validation-for="Quantidade" class="text-danger"></span>
+                <input asp-for="Quantidade" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="FaturaId" class="control-label"></label>
-                <input asp-for="FaturaId" min="1" value="@ViewBag.Id" class="form-control" />
-                <span asp-validation-for="FaturaId" class="text-danger"></span>
+                <input asp-for="FaturaId" min="1" value="@ViewBag.Id" class="form-control" required />
             </div>
             <br />
             <div class="form-group">
@@ -55,9 +49,5 @@
 </div>
 <br />
 <div>
-    <a href="javascript:history.back()" >Voltar</a>
+    <a href="javascript:history.back()">Voltar</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

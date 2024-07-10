@@ -32,20 +32,18 @@ namespace GestorMVC.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalCompra {get; set;}
 
-        [Required(ErrorMessage = "O tipo do pagamento é obrigatório")]
+
         [Display(Name = "Tipo Pagamento")]
         public TipoPagamento TipoPagamento { get; set; }
 
         [Required(ErrorMessage = "A data da Compra é obrigatória")]
         [Display(Name = "Data")]
         public DateOnly DataCompra { get; set;}
-        [Range(1, int.MaxValue, ErrorMessage = "O número de parcelas deve ser maior ou igual a 0.")]
         public int? Parcelas { get; set; }
 
-        [Required(ErrorMessage = "O Estado da Fatura é obrigatório")]
+
         public EstadoFatura Estado {get; set; }
         
-        [Required(ErrorMessage = "O nome do recebedor é obrigatório.")]
         [StringLength(150)]
         public string Recebedor { get; set; }
 

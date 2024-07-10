@@ -14,43 +14,37 @@
         <form asp-action="EditarFatura">
             <div class="form-group">
                 <label asp-for="TotalCompra" class="control-label"></label>
-                <input asp-for="TotalCompra" class="form-control" />
-                <span asp-validation-for="TotalCompra" class="text-danger"></span>
+                <input asp-for="TotalCompra" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="TipoPagamento" class="control-label"></label>
-                <select asp-for="TipoPagamento" class="form-select">
+                <select asp-for="TipoPagamento" class="form-select" required>
                     @foreach (var item in tiposPagamento)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <span asp-validation-for="TipoPagamento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DataCompra" class="control-label"></label>
-                <input asp-for="DataCompra" class="form-control" />
-                <span asp-validation-for="DataCompra" class="text-danger"></span>
+                <input asp-for="DataCompra" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Estado" class="control-label">Estado da Fatura:</label>
-                <select asp-for="Estado" class="form-select">
+                <select asp-for="Estado" class="form-select" required>
                     @foreach (var item in estados)
                     {
                         <option value="@item.Value">@item.Text</option>
                     }
                 </select>
-                <span asp-validation-for="Estado" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Recebedor" class="control-label"></label>
-                <input asp-for="Recebedor" class="form-control" />
-                <span asp-validation-for="Recebedor" class="text-danger"></span>
+                <input asp-for="Recebedor" class="form-control" required />
             </div>
             <div class="form-group">
-                <label asp-for="Parcelas" class="control-label"></label>
-                <input asp-for="Parcelas" class="form-control" />
-                <span asp-validation-for="Parcelas" class="text-danger"></span>
+                <label asp-for="Parcelas" class="control-label">Número de parcelas (caso não possua, deixar vazio)</label>
+                <input asp-for="Parcelas" min="0" class="form-control" />
             </div>
             <br />
             <div class="form-group">
@@ -61,9 +55,5 @@
 </div>
 <br />
 <div>
-    <a href="javascript:history.back()" >Voltar</a>
+    <a href="javascript:history.back()">Voltar</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

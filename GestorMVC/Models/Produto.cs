@@ -28,27 +28,20 @@ namespace GestorMVC.Models
 
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O nome é obrigatório.")]
-        [StringLength(100, ErrorMessage = "O nome não pode exceder 100 caracteres.")]
+        [StringLength(100)]
         public string Nome { get; set; }
         
-        [Required(ErrorMessage = "A categoria é obrigatória.")]
         public CategoriaProduto Categoria { get; set; }
 
-        [Required(ErrorMessage = "A quantidade é obrigatória.")]
-        [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser pelo menos 1.")]
         public int Quantidade { get; set; }
         
         public DateOnly? Validade { get; set; }
         
         [Display(Name = "Preço Unidade")]
-        [Required(ErrorMessage = "O preço é obrigatório.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Preco { get; set; }
 
         [Display(Name = "Id da Fatura")]
-        [Required(ErrorMessage = "O ID da fatura é obrigatório.")]
         public int FaturaId { get; set;}
 
         [ForeignKey("FaturaId")]
