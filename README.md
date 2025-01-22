@@ -19,10 +19,10 @@ Este é um projeto pessoal desenvolvido utilizando ASP.NET Core e SQL Server par
   
 ## Como Executar o Projeto
 
-- Online
-  - só acessar em [Gestor de Compras](https://gestordecompras.azurewebsites.net)
+- Online:
+  - [projeto retirado do ar devido a restrições da Azure]
 
-- LocalHost
+- LocalHost:
   1. Clone o repositório.
   2. Abra o projeto preferencialmente no Visual Studio Code.
   3. Configure a conexão com o banco de dados SQL Server nos arquivo `appsettings.Development.json` e/ou `appsettings.json`, modificando o campo "ConexaoPadrao".
